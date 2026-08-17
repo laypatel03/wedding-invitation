@@ -127,11 +127,12 @@ function markPlaying() {
 
 function tryPlayMusic() {
     if (!bgMusic || !bgMusic.getAttribute('src')) return;
+    bgMusic.currentTime = 15;   // start from the 15-second mark
     bgMusic.play().then(markPlaying).catch(() => {
-        // Blocked — fall back to the muted-autoplay trick below
         startMutedThenUnmuteOnInteraction();
     });
 }
+
 tryPlayMusic();
 
 // Fallback for browsers that refused the unmuted attempt above (mainly
@@ -153,6 +154,11 @@ function startMutedThenUnmuteOnInteraction() {
         document.addEventListener(evt, unmuteMusic, { once: true });
     });
 }
+
+bgMusic.addEventListener('ended', () => {
+    bgMusic.currentTime = 15;
+    bgMusic.play().catch(() => { });
+});
 
 openBtn.addEventListener('click', () => {
     const rect = openBtn.getBoundingClientRect();
