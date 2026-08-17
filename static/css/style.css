@@ -443,6 +443,26 @@ html.lock-scroll body {
     padding: 40px 24px;
 }
 
+.hero-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* or 'flex-start' if you want left-aligned */
+    text-align: center;
+    line-height: 1.2;
+}
+
+.hero-names .name,
+.hero-names .amp {
+    display: block;
+}
+
+.hero-names .amp {
+    font-size: 0.5em;
+    opacity: 0.7;
+    margin: 0.2em 0;
+}
+
 .diya {
     width: 74px;
     height: auto;
