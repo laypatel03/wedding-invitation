@@ -15,12 +15,12 @@ wedding-invite/
     │   └── main.js         # countdown, scroll reveal, hearts, music, petals
     └── images/
         ├── peacock.png     # ADD YOUR PEACOCK IMAGE HERE
-        └── gaensha.png     # ADD YOUR GANESHA IMAGE HERE
+        └── ganesh.png     # ADD YOUR GANESHA IMAGE HERE
 ```
 
 ## 1. Add your images
 
-Drop your actual `peacock.png` and `gaensha.png` files into `static/images/`.
+Drop your actual `peacock.png` and `ganesh.png` files into `static/images/`.
 Those exact filenames are already referenced in `templates/index.html`, so no
 other changes are needed once they're in place.
 
