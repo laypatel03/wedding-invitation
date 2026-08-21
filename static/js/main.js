@@ -127,7 +127,7 @@ function markPlaying() {
 
 function tryPlayMusic() {
     if (!bgMusic || !bgMusic.getAttribute('src')) return;
-    bgMusic.currentTime = 15;   // start from the 15-second mark
+    bgMusic.currentTime = 0;   // start from the 15-second mark
     bgMusic.play().then(markPlaying).catch(() => {
         startMutedThenUnmuteOnInteraction();
     });
@@ -156,7 +156,7 @@ function startMutedThenUnmuteOnInteraction() {
 }
 
 bgMusic.addEventListener('ended', () => {
-    bgMusic.currentTime = 15;
+    bgMusic.currentTime = 0;
     bgMusic.play().catch(() => { });
 });
 
