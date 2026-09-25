@@ -8,6 +8,11 @@ def index():
     """Serves the wedding invitation page."""
     return render_template("index.html")
 
+@app.route("/menu")
+def menu():
+    """Serves the wedding invitation page."""
+    return render_template("menu.html")
+
 
 if __name__ == "__main__":
     # debug=True is handy while you're editing; turn it off before you deploy.
