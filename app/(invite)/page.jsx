@@ -1,5 +1,7 @@
 import InviteEffects from './InviteEffects';
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH;
+
 const HEART_PATH = 'M12 21s-7.5-5.2-10-9.3C-0.5 7.8 2 4 6 4c2.2 0 3.6 1.2 6 3.6C14.4 5.2 15.8 4 18 4c4 0 6.5 3.8 4 7.7C19.5 15.8 12 21 12 21z';
 
 const FLOATING_HEARTS = [
@@ -71,10 +73,10 @@ export default function InvitePage() {
 
                 {/* peacock artwork */}
                 <div className="cover-peacock left">
-                    <img src="/images/peacock.png" alt="Peacock" className="cover-peacock-img mirror" />
+                    <img src={`${BASE}/images/peacock.png`} alt="Peacock" className="cover-peacock-img mirror" />
                 </div>
                 <div className="cover-peacock right">
-                    <img src="/images/peacock.png" alt="Peacock" className="cover-peacock-img" />
+                    <img src={`${BASE}/images/peacock.png`} alt="Peacock" className="cover-peacock-img" />
                 </div>
 
                 <div className="cover-content">
@@ -98,9 +100,9 @@ export default function InvitePage() {
             <div className="heart-burst" id="heartBurst" aria-hidden="true"></div>
 
             {/* ================= BACKGROUND MUSIC ================= */}
-            {/* Replace the src below with your song file (put it in public/audio/) or a hosted MP3 link */}
-            {/* <audio id="bgMusic" src="/audio/KrishnaTheme.mp3" loop preload="none"></audio> */}
-            <audio id="bgMusic" src="/audio/bol-na-halke-halke-instrumental.mp3" loop preload="auto"></audio>
+            {/* Replace the src below with your song file (put it in public/audio/ and keep the ${BASE} prefix) or a hosted MP3 link */}
+            {/* <audio id="bgMusic" src={`${BASE}/audio/KrishnaTheme.mp3`} loop preload="none"></audio> */}
+            <audio id="bgMusic" src={`${BASE}/audio/bol-na-halke-halke-instrumental.mp3`} loop preload="auto"></audio>
             <button id="musicToggle" className="music-toggle" type="button" aria-label="Toggle background music">
                 <svg viewBox="0 0 24 24">
                     <path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM21 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -121,7 +123,7 @@ export default function InvitePage() {
                     </filter>
                 </svg>
 
-                <img className="diya" src="/images/ganesha.svg" alt="Lord Ganesha" style={{ filter: 'url(#tint-plum)' }} />
+                <img className="diya" src={`${BASE}/images/ganesha.svg`} alt="Lord Ganesha" style={{ filter: 'url(#tint-plum)' }} />
 
                 <div className="eyebrow">Together with their families</div>
                 <h1 className="hero-names">
@@ -142,7 +144,7 @@ export default function InvitePage() {
             {/* ================= BLESSING ================= */}
             <section className="blessing">
                 <div className="ganesha-wrap reveal">
-                    <img src="/images/ganesh.png" alt="Lord Ganesha" className="ganesha-img" />
+                    <img src={`${BASE}/images/ganesh.png`} alt="Lord Ganesha" className="ganesha-img" />
                 </div>
                 <p className="shloka reveal">Vakratunda Mahākāya, Sūryakoṭi Samaprabha<br />Nirvighnaṁ Kuru Me Deva, Sarva-Kāryeṣu
                     Sarvadā</p>
@@ -276,7 +278,7 @@ export default function InvitePage() {
                             href="https://maps.google.com/?q=JP+Farm+Gandevi+Road+near+Salej+Ichhapur+Navsari+Gujarat+396350"
                             target="_blank" rel="noopener">View on Map</a>
                         <a className="btn" style={outlineBtn}
-                            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bhavi+%26+Priyanka+Wedding+Reception&dates=20280129T133000Z/20280129T183000Z&details=Grand+Wedding+Reception+of+Bhavi+%26+Priyanka+at+JP+Farm&location=JP+Farm,+Gandevi+Road,+near+Salej,+Ichhapur,+Navsari,+Gujarat+396350"
+                            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bhavi+%26+Priyanka+Wedding+Reception&dates=20270129T133000Z/20270129T183000Z&details=Grand+Wedding+Reception+of+Bhavi+%26+Priyanka+at+JP+Farm&location=JP+Farm,+Gandevi+Road,+near+Salej,+Ichhapur,+Navsari,+Gujarat+396350"
                             target="_blank" rel="noopener">Add to Calendar</a>
                     </div>
                 </div>

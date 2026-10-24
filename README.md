@@ -37,7 +37,7 @@ To change the song, put the MP3 in `public/audio/` and edit the `<audio>` tag
 in `app/(invite)/page.jsx`:
 
 ```jsx
-<audio id="bgMusic" src="/audio/song.mp3" loop preload="auto"></audio>
+<audio id="bgMusic" src={`${BASE}/audio/song.mp3`} loop preload="auto"></audio>
 ```
 
 ## 2. Run it locally
@@ -47,7 +47,10 @@ npm install
 npm run dev
 ```
 
-Then open **http://localhost:5050** (invitation) or **http://localhost:5050/menu**.
+Then open **http://localhost:5050/wedding** (invitation) or **http://localhost:5050/wedding/menu**.
+
+The site is served under `/wedding` (see `basePath` in `next.config.mjs`). Image and
+audio paths in `page.jsx` use the `BASE` prefix so they follow that setting.
 
 ## 3. Hosting it for real
 
