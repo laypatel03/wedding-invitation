@@ -1,71 +1,58 @@
-# Bhavi & Priyanka — Wedding Invitation (Flask)
+# Bhavi & Priyanka — Wedding Invitation (Next.js)
 
 ## Folder structure
 
 ```
 wedding-invite/
-├── app.py                 # Flask app entry point
-├── requirements.txt
-├── templates/
-│   └── index.html         # the invitation page (Jinja template)
-└── static/
-    ├── css/
-    │   └── style.css       # all styling
-    ├── js/
-    │   └── main.js         # countdown, scroll reveal, hearts, music, petals
-    └── images/
-        ├── peacock.png     # ADD YOUR PEACOCK IMAGE HERE
-        └── ganesh.png     # ADD YOUR GANESHA IMAGE HERE
+├── package.json
+├── next.config.mjs
+├── app/
+│   ├── (invite)/              # "/"  — the wedding invitation
+│   │   ├── layout.jsx         # <html>, fonts, page title/meta
+│   │   ├── page.jsx           # the invitation markup
+│   │   ├── InviteEffects.jsx  # countdown, scroll reveal, hearts, music, petals
+│   │   └── invite.css         # all invitation styling
+│   └── (menu)/                # "/menu" — Healthy Hunger café menu
+│       ├── layout.jsx
+│       ├── menu.css
+│       └── menu/
+│           ├── page.jsx
+│           ├── MenuSection.jsx  # tabs, filters, menu list
+│           ├── CopyPhone.jsx
+│           └── data.js          # menu items and add-ons
+└── public/
+    ├── images/                # peacock.png, ganesh.png, ganesha.svg
+    └── audio/                 # background music
 ```
 
-## 1. Add your images
+The two pages live in separate route groups, each with its own root layout,
+so their stylesheets never mix.
 
-Drop your actual `peacock.png` and `ganesh.png` files into `static/images/`.
-Those exact filenames are already referenced in `templates/index.html`, so no
-other changes are needed once they're in place.
+## 1. Images and music
 
-## 2. Add your song (optional)
+Everything in `public/` is served from the site root, e.g.
+`public/images/peacock.png` → `/images/peacock.png`.
 
-Open `templates/index.html`, find this line near the top of `<body>`:
+To change the song, put the MP3 in `public/audio/` and edit the `<audio>` tag
+in `app/(invite)/page.jsx`:
 
-```html
-<audio id="bgMusic" loop preload="none"></audio>
+```jsx
+<audio id="bgMusic" src="/audio/song.mp3" loop preload="auto"></audio>
 ```
 
-Put your MP3 file in `static/images/` (or make a `static/audio/` folder) and
-point the tag at it, e.g.:
-
-```html
-<audio id="bgMusic" loop preload="none" src="{{ url_for('static', filename='audio/song.mp3') }}"></audio>
-```
-
-## 3. Run it locally
+## 2. Run it locally
 
 ```bash
-cd wedding-invite
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
+npm install
+npm run dev
 ```
 
-Then open **http://127.0.0.1:5000** in your browser.
+Then open **http://localhost:5050** (invitation) or **http://localhost:5050/menu**.
 
-## 4. Hosting it for real
+## 3. Hosting it for real
 
-Any host that runs Python/Flask works. A few easy free/cheap options:
+- **Vercel** (vercel.com) — import the GitHub repo; it detects Next.js
+  automatically. Free tier available.
+- **Netlify**, **Render**, **Railway** — all support Next.js out of the box.
 
-- **Render** (render.com) — connect your GitHub repo, it auto-detects Flask,
-  free tier available.
-- **PythonAnywhere** — upload the folder directly, good for small personal
-  sites, free tier available.
-- **Railway** (railway.app) — connect repo, auto-deploys.
-
-For any of these: push this folder to a GitHub repo, then connect that repo
-to the host. Do **not** use `app.run(debug=True)` in production — the hosts
-above run your app with a proper WSGI server (e.g. gunicorn) automatically,
-so you don't need to change anything else.
-
-If you'd rather not deal with a server at all, this same design also works
-as a single static HTML file (no Flask needed) — ask if you'd like that
-version back instead.
+Or run it yourself with `npm run build && npm start`.
