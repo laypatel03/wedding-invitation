@@ -59,3 +59,18 @@ audio paths in `page.jsx` use the `BASE` prefix so they follow that setting.
 - **Netlify**, **Render**, **Railway** — all support Next.js out of the box.
 
 Or run it yourself with `npm run build && npm start`.
+
+## RSVPs
+
+Guests reply with the form in the "Will You Join Us?" section. Responses are
+saved one per line in `data/rsvps.jsonl` (or wherever `RSVP_FILE` points) and
+are viewed at **/wedding/rsvps**, which asks for a password (any username,
+password = `RSVP_ADMIN_PASSWORD`). The page has totals, filters, WhatsApp links
+for each guest and a CSV download. If a guest submits again with the same
+mobile number, their newest answer replaces the old one on that page; the CSV
+keeps every submission.
+
+Local setup: copy `.env.example` to `.env.local` and set a password.
+
+Because of the RSVP form the site needs a running Node server
+(`npm run build && npm start`); it can no longer be hosted as plain static files.

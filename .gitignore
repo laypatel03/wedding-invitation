@@ -4,3 +4,8 @@ out/
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# RSVP responses and secrets — never commit
+data/
+.env
+.env*.local

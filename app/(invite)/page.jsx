@@ -1,4 +1,5 @@
 import InviteEffects from './InviteEffects';
+import RsvpForm from './RsvpForm';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH;
 
@@ -284,6 +285,16 @@ export default function InvitePage() {
                 </div>
             </section>
 
+            {/* ================= RSVP ================= */}
+            <section className="venue" id="rsvp">
+                <div className="eyebrow reveal">Kindly Respond</div>
+                <h2 className="section-title reveal">Will You Join Us?</h2>
+                <div className="divider reveal"></div>
+                <div className="venue-card rsvp-card reveal">
+                    <RsvpForm />
+                </div>
+            </section>
+
             {/* ================= HOSTS / COMPLIMENTS ================= */}
             <section className="blessing" style={{ paddingTop: 30, paddingBottom: 60 }}>
                 <div className="eyebrow reveal">With Warm Regards</div>
@@ -308,7 +319,7 @@ export default function InvitePage() {
                     <div style={btnRow}>
                         <a className="btn" href="tel:+919824856661">Call Us</a>
                         <a className="btn" style={outlineBtn}
-                            href="https://wa.me/919824856661" target="_blank" rel="noopener">WhatsApp</a>
+                            href="https://wa.me/12018569575" target="_blank" rel="noopener">WhatsApp</a>
                         <a className="btn" style={outlineBtn}
                             href="mailto:shivpatel6661@gmail.com">Email</a>
                     </div>

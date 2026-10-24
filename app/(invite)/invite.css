@@ -917,6 +917,158 @@ html.lock-scroll body {
 }
 
 /* ===========================================================
+     RSVP
+     =========================================================== */
+.rsvp-card {
+    padding: 36px 26px;
+}
+
+.rsvp-form {
+    display: grid;
+    gap: 20px;
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.field > label,
+.field-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--plum-soft);
+    margin-bottom: 8px;
+}
+
+.field > label span {
+    letter-spacing: normal;
+    text-transform: none;
+    font-style: italic;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 16px; /* 16px stops iOS zooming in on focus */
+    color: var(--plum);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #E8D5C8;
+    border-radius: 12px;
+    padding: 13px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field input::placeholder {
+    color: #B9A3AC;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(195, 154, 86, 0.18);
+}
+
+.choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.choice label {
+    position: relative;
+    padding: 13px 10px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--plum);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #E8D5C8;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.choice label.on {
+    background: var(--plum);
+    border-color: var(--plum);
+    color: var(--ivory);
+}
+
+.choice label:has(input:focus-visible) {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+.choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.rsvp-error {
+    color: #A23B3B;
+    font-size: 14px;
+    text-align: center;
+}
+
+.rsvp-actions {
+    text-align: center;
+}
+
+.rsvp-actions .btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+.rsvp-done {
+    padding: 10px 0;
+}
+
+.rsvp-done-title {
+    font-family: var(--script);
+    font-style: italic;
+    font-size: clamp(30px, 6vw, 40px);
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.rsvp-done p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--plum-soft);
+    margin-bottom: 18px;
+}
+
+.rsvp-link {
+    background: none;
+    border: none;
+    font-family: var(--body);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--plum);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+/* ===========================================================
      FOOTER
      =========================================================== */
 footer {
