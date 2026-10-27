@@ -1,5 +1,6 @@
 import { readLatestRsvps } from '@/lib/rsvp';
-import { logout } from './actions';
+import { formatDate, formatPhone, getSettings } from '@/lib/settings';
+import AdminNav from '../AdminNav';
 
 // Always read the file fresh — never cache this page
 export const dynamic = 'force-dynamic';
@@ -12,15 +13,10 @@ function formatTime(iso) {
     });
 }
 
-function formatPhone(phone) {
-    return phone.startsWith('91') && phone.length === 12
-        ? `+91 ${phone.slice(2, 7)} ${phone.slice(7)}`
-        : `+${phone}`;
-}
-
 export default async function RsvpsPage({ searchParams }) {
     const { show = 'all' } = await searchParams;
     const all = await readLatestRsvps();
+    const { day } = formatDate((await getSettings()).date);
 
     const coming = all.filter(r => r.attending === 'yes');
     const declined = all.filter(r => r.attending === 'no');
@@ -31,17 +27,13 @@ export default async function RsvpsPage({ searchParams }) {
 
     return (
         <main className="wrap">
+            <AdminNav current="rsvps" />
             <header className="head">
                 <div>
-                    <div className="eyebrow">Bhavi &amp; Priyanka · 29 Jan 2027</div>
+                    <div className="eyebrow">Bhavi &amp; Priyanka · {day}</div>
                     <h1>RSVPs</h1>
                 </div>
-                <div className="head-actions">
-                    <a className="btn" href={`${BASE}/rsvps/export`}>Download CSV</a>
-                    <form action={logout}>
-                        <button className="btn ghost" type="submit">Sign out</button>
-                    </form>
-                </div>
+                <a className="btn" href={`${BASE}/rsvps/export`}>Download CSV</a>
             </header>
 
             <section className="stats">

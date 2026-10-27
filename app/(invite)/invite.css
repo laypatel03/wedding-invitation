@@ -1108,3 +1108,9 @@ footer .foot-sub {
     background: var(--gold-soft);
     color: var(--plum);
 }
+/* Second and third contact person in "For Any Inquiries" */
+.contact-more {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #F0E0D6;
+}

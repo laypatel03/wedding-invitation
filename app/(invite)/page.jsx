@@ -1,3 +1,5 @@
+import { calendarUrl, formatDate, formatPhone, formatTime, getSettings, startTimestamp } from '@/lib/settings';
+import EventIcon from './EventIcon';
 import InviteEffects from './InviteEffects';
 import RsvpForm from './RsvpForm';
 
@@ -18,7 +20,11 @@ const familyName = { fontFamily: 'var(--display)', fontSize: 'clamp(18px, 3.4vw,
 const outlineBtn = { background: 'transparent', border: '1px solid var(--gold)', color: 'var(--plum)' };
 const btnRow = { display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' };
 
-export default function InvitePage() {
+export default async function InvitePage() {
+    const settings = await getSettings();
+    const { weekday, day } = formatDate(settings.date);
+    const { venue } = settings;
+
     return (
         <>
             {/* Hidden filter defs — recolor-plum for the Ganesha artwork, recolor-gold for the peacocks */}
@@ -134,10 +140,10 @@ export default function InvitePage() {
                 </h1>
                 <p className="hero-sub">cordially request the honor of your presence at their Grand Wedding Reception</p>
                 <div className="hero-date">
-                    <span>Friday · 29 January 2027 · 5:00 PM Onwards</span>
+                    <span>{weekday} · {day} · {formatTime(settings.startTime)} Onwards</span>
                 </div>
                 <div className="hero-date">
-                    <span>JP Farm · Navsari, Gujarat</span>
+                    <span>{[venue.name, venue.area].filter(Boolean).join(' · ')}</span>
                 </div>
                 <div className="scroll-cue">Scroll to unfold ✦</div>
             </section>
@@ -196,48 +202,18 @@ export default function InvitePage() {
                 <h2 className="section-title reveal">An Evening of Joy</h2>
                 <div className="divider reveal"></div>
                 <div className="event-list">
-
-                    <div className="event-card reveal">
-                        <div className="event-icon"><svg viewBox="0 0 24 24">
-                            <path d="M8 10h8c1 0 2 1 2 2v2c0 4-3 7-6 7s-6-3-6-7v-2c0-1 1-2 2-2z" />
-                            <path d="M6 10c0-3 3-5 6-5s6 2 6 5" />
-                            <path d="M10 5 Q12 2 14 5" />
-                        </svg></div>
-                        <div className="event-body">
-                            <div className="event-name">Grand Welcome</div>
-                            <div className="event-meta"><strong>5:00 PM Onwards</strong><br />Guest Arrival &amp; Welcome Refreshments
+                    {settings.events.map((e, i) => (
+                        <div key={i} className="event-card reveal">
+                            <div className="event-icon"><EventIcon name={e.icon} /></div>
+                            <div className="event-body">
+                                <div className="event-name">{e.name}</div>
+                                <div className="event-meta">
+                                    <strong>{formatTime(e.time)}{e.onwards && ' Onwards'}</strong>
+                                    {e.description && <><br />{e.description}</>}
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="event-card reveal">
-                        <div className="event-icon"><svg viewBox="0 0 24 24">
-                            <circle cx="9" cy="13" r="5" />
-                            <circle cx="15" cy="13" r="5" />
-                            <path d="M12 4v3M12 7l-1-1M12 7l1-1" />
-                            <path d="M6 6l1.5 1.5M18 6l-1.5 1.5" />
-                        </svg></div>
-                        <div className="event-body">
-                            <div className="event-name">Couple Entrance &amp; Celebration</div>
-                            <div className="event-meta"><strong>6:00 PM</strong><br />Welcoming the Newlyweds &amp; Celebration Toast
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="event-card reveal">
-                        <div className="event-icon"><svg viewBox="0 0 24 24">
-                            <path d="M4 18h16M5 18a7 7 0 0 1 14 0H5z" />
-                            <path d="M12 11V8" />
-                            <circle cx="12" cy="7" r="1.2" fill="var(--gold)" />
-                            <path d="M8 21h8" />
-                        </svg></div>
-                        <div className="event-body">
-                            <div className="event-name">Royal Banquet &amp; Festivities</div>
-                            <div className="event-meta"><strong>7:30 PM Onwards</strong><br />Exquisite Dinner Feast, Music &amp;
-                                Photo Moments</div>
-                        </div>
-                    </div>
-
+                    ))}
                 </div>
             </section>
 
@@ -269,17 +245,16 @@ export default function InvitePage() {
             {/* ================= VENUE ================= */}
             <section className="venue">
                 <div className="eyebrow reveal">Reception Venue</div>
-                <h2 className="section-title reveal">JP Farm</h2>
+                <h2 className="section-title reveal">{venue.name}</h2>
                 <div className="divider reveal"></div>
                 <div className="venue-card reveal">
-                    <div className="venue-name">JP Farm</div>
-                    <div className="venue-addr">Gandevi Road, near Salej, Ichhapur, Navsari, Gujarat 396350</div>
+                    <div className="venue-name">{venue.name}</div>
+                    {venue.address && <div className="venue-addr">{venue.address}</div>}
                     <div style={btnRow}>
-                        <a className="btn"
-                            href="https://maps.google.com/?q=JP+Farm+Gandevi+Road+near+Salej+Ichhapur+Navsari+Gujarat+396350"
-                            target="_blank" rel="noopener">View on Map</a>
-                        <a className="btn" style={outlineBtn}
-                            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bhavi+%26+Priyanka+Wedding+Reception&dates=20270129T133000Z/20270129T183000Z&details=Grand+Wedding+Reception+of+Bhavi+%26+Priyanka+at+JP+Farm&location=JP+Farm,+Gandevi+Road,+near+Salej,+Ichhapur,+Navsari,+Gujarat+396350"
+                        {venue.mapUrl && (
+                            <a className="btn" href={venue.mapUrl} target="_blank" rel="noopener">View on Map</a>
+                        )}
+                        <a className="btn" style={outlineBtn} href={calendarUrl(settings)}
                             target="_blank" rel="noopener">Add to Calendar</a>
                     </div>
                 </div>
@@ -316,16 +291,25 @@ export default function InvitePage() {
                         For any questions about the celebration,<br />
                         please feel free to reach out to us.
                     </div>
-                    <div style={btnRow}>
-                        <a className="btn" href="tel:+919824856661">Call Us</a>
-                        <a className="btn" style={outlineBtn}
-                            href="https://wa.me/12018569575" target="_blank" rel="noopener">WhatsApp</a>
-                        <a className="btn" style={outlineBtn}
-                            href="mailto:shivpatel6661@gmail.com">Email</a>
-                    </div>
-                    <div className="venue-addr" style={{ marginTop: 26, marginBottom: 0 }}>
-                        <strong style={{ color: 'var(--plum)' }}>Shiv Patel</strong> &nbsp;·&nbsp; +91 98248 56661
-                    </div>
+                    {settings.contacts.map((c, i) => (
+                        <div key={i} className={i > 0 ? 'contact-more' : undefined}>
+                            <div style={btnRow}>
+                                {c.call && <a className="btn" href={`tel:+${c.call}`}>Call Us</a>}
+                                {c.whatsapp && (
+                                    <a className="btn" style={c.call ? outlineBtn : undefined}
+                                        href={`https://wa.me/${c.whatsapp}`} target="_blank" rel="noopener">WhatsApp</a>
+                                )}
+                                {c.email && (
+                                    <a className="btn" style={c.call || c.whatsapp ? outlineBtn : undefined}
+                                        href={`mailto:${c.email}`}>Email</a>
+                                )}
+                            </div>
+                            <div className="venue-addr" style={{ marginTop: 26, marginBottom: 0 }}>
+                                <strong style={{ color: 'var(--plum)' }}>{c.name}</strong>
+                                {(c.call || c.whatsapp) && <> &nbsp;·&nbsp; {formatPhone(c.call || c.whatsapp)}</>}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -343,7 +327,7 @@ export default function InvitePage() {
                 <div className="foot-sub">With gratitude and joy, we welcome you</div>
             </footer>
 
-            <InviteEffects />
+            <InviteEffects startsAt={startTimestamp(settings)} />
         </>
     );
 }

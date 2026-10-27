@@ -26,7 +26,6 @@ body {
 .eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 h1 { font-family: 'Marcellus', serif; font-weight: 400; font-size: 40px; line-height: 1; }
 
-.head-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .btn {
     display: inline-block; font-family: inherit; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
@@ -35,8 +34,6 @@ h1 { font-family: 'Marcellus', serif; font-weight: 400; font-size: 40px; line-he
 }
 .btn:hover { background: var(--gold); border-color: var(--gold); }
 .btn:disabled { opacity: .6; cursor: wait; }
-.btn.ghost { background: transparent; color: var(--plum); border-color: var(--line); }
-.btn.ghost:hover { background: #fff; border-color: var(--plum); }
 
 .login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
 .login-card {
@@ -86,3 +83,63 @@ h1 { font-family: 'Marcellus', serif; font-weight: 400; font-size: 40px; line-he
 .when { grid-column: 1 / -1; font-size: 12px; color: #A8929B; }
 
 .empty { background: #fff; border: 1px dashed var(--line); border-radius: 14px; padding: 40px 16px; text-align: center; color: var(--plum-soft); }
+
+/* ---------- top bar shared by RSVPs + Edit invitation ---------- */
+.admin-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+.admin-tabs { display: flex; gap: 4px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+.admin-tabs a { font-size: 14px; font-weight: 500; text-decoration: none; color: var(--plum-soft); padding: 7px 14px; border-radius: 999px; }
+.admin-tabs a.on { background: var(--plum); color: var(--ivory); }
+.admin-nav-end { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+.admin-nav-end a { color: var(--plum-soft); text-decoration: none; }
+.admin-nav-end a:hover { color: var(--gold); }
+.admin-nav-end button { font: inherit; font-size: 14px; color: var(--plum-soft); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- invitation editor ---------- */
+.intro { font-size: 14px; color: var(--plum-soft); line-height: 1.6; margin: -8px 0 20px; max-width: 62ch; }
+.settings { display: grid; gap: 16px; padding-bottom: 90px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.card h2 { font-family: 'Marcellus', serif; font-weight: 400; font-size: 22px; margin-bottom: 16px; }
+.grid { display: grid; gap: 14px 16px; }
+.grid.two { grid-template-columns: 1fr 1fr; }
+.grid.three { grid-template-columns: 1.4fr 1fr 1fr; }
+.grid .wide { grid-column: 1 / -1; }
+@media (max-width: 640px) { .grid.two, .grid.three { grid-template-columns: 1fr; } }
+
+.fld { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fld > span { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--plum-soft); }
+.fld > span i { text-transform: none; letter-spacing: normal; }
+.fld input, .fld select {
+    width: 100%; font: inherit; font-size: 16px; color: var(--plum); background: var(--ivory);
+    border: 1px solid #E8D5C8; border-radius: 10px; padding: 10px 12px; min-height: 44px;
+}
+.fld input:focus, .fld select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(195,154,86,.18); }
+.fld.check { flex-direction: row; align-items: center; gap: 10px; align-self: end; min-height: 44px; }
+.fld.check input { width: 20px; height: 20px; min-height: 0; accent-color: var(--plum); }
+.fld.check span { font-size: 15px; letter-spacing: normal; text-transform: none; color: var(--plum); }
+.hint { font-size: 13px; color: var(--plum-soft); line-height: 1.6; margin-top: 12px; }
+.hint b { color: var(--plum); font-weight: 600; }
+
+.items { list-style: none; display: grid; gap: 12px; }
+.item { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #FFFCF8; }
+.item-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.item-head b { font-size: 14px; font-weight: 600; }
+.item-actions { display: flex; gap: 6px; }
+.item-actions button, .add {
+    font: inherit; font-size: 13px; color: var(--plum); background: #fff; border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 12px; min-height: 34px; cursor: pointer;
+}
+.item-actions button:hover:not(:disabled), .add:hover:not(:disabled) { border-color: var(--plum); }
+.item-actions button:disabled, .add:disabled { opacity: .4; cursor: not-allowed; }
+.item-actions .danger { color: var(--no); }
+.add { margin-top: 12px; font-weight: 500; }
+
+.save-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: flex-end; gap: 16px;
+    padding: 12px max(16px, calc((100vw - 860px) / 2 + 16px));
+    background: rgba(251, 246, 239, .96); border-top: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+}
+.save-status { flex: 1; font-size: 14px; color: var(--plum-soft); }
+.save-status .ok { color: var(--yes); font-weight: 500; }
+.save-status .err { color: var(--no); font-weight: 500; }

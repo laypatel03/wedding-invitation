@@ -72,5 +72,16 @@ keeps every submission.
 
 Local setup: copy `.env.example` to `.env.local` and set a password.
 
-Because of the RSVP form the site needs a running Node server
+Because of the RSVP form and admin page the site needs a running Node server
 (`npm run build && npm start`); it can no longer be hosted as plain static files.
+
+## Editing the invitation
+
+Sign in at **/reception/admin** (same password as the RSVP list) to change the
+date and times, the programme, contact people and the venue. Saving updates the
+live invitation, the countdown, Add to Calendar and the link-preview picture
+immediately. The values are stored in `SETTINGS_FILE` (default
+`data/settings.json`); defaults live in `lib/settings.js`.
+
+The link-preview picture is drawn by `app/(invite)/share-image/route.jsx` on top
+of `assets/og-base.png`, using the fonts in `assets/fonts/` (SIL Open Font License).

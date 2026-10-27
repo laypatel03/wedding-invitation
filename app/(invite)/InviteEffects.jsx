@@ -2,13 +2,13 @@
 
 import { useEffect } from 'react';
 
-const WEDDING_DATE = new Date('2027-01-29T19:00:00+05:30').getTime();
 const HEART_PATH = 'M12 21s-7.5-5.2-10-9.3C-0.5 7.8 2 4 6 4c2.2 0 3.6 1.2 6 3.6C14.4 5.2 15.8 4 18 4c4 0 6.5 3.8 4 7.7C19.5 15.8 12 21 12 21z';
 
 // Port of the old static/js/main.js. The markup is rendered by page.jsx;
 // this component only wires up behaviour once it is in the DOM, and tears
 // everything down again on unmount (matters for dev-mode double effects).
-export default function InviteEffects() {
+// startsAt: reception start (ms since epoch), from the admin settings
+export default function InviteEffects({ startsAt }) {
     useEffect(() => {
         const cleanups = [];
         const listen = (target, evt, fn, opts) => {
@@ -30,7 +30,7 @@ export default function InviteEffects() {
 
         // ---------- Countdown ----------
         function tickCountdown() {
-            const diff = Math.max(0, WEDDING_DATE - Date.now());
+            const diff = Math.max(0, startsAt - Date.now());
             const d = Math.floor(diff / 86400000);
             const h = Math.floor((diff % 86400000) / 3600000);
             const m = Math.floor((diff % 3600000) / 60000);
@@ -218,7 +218,7 @@ export default function InviteEffects() {
         });
 
         return () => cleanups.forEach(fn => fn());
-    }, []);
+    }, [startsAt]);
 
     return null;
 }
