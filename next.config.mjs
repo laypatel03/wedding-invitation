@@ -1,6 +1,6 @@
-// The site is served at https://bhavipriyanka.com/wedding. Set this to '' if it
+// The site is served at https://bhavipriyanka.com/reception. Set this to '' if it
 // ever moves to the root of its domain.
-const basePath = '/wedding';
+const basePath = '/reception';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

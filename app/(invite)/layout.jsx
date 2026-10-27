@@ -1,11 +1,11 @@
 import './invite.css';
 
 // Link previews (WhatsApp, iMessage, etc.) need absolute URLs
-const SITE_URL = 'https://bhavipriyanka.com/wedding';
+const SITE_URL = 'https://bhavipriyanka.com/reception';
 const SHARE_DESCRIPTION =
     'Join us on Friday, 29 January 2027 at JP Farm, Navsari for the Grand Wedding Reception of Bhavi & Priyanka.';
 const SHARE_IMAGE = {
-    url: 'https://bhavipriyanka.com/wedding/og-image.jpg',
+    url: 'https://bhavipriyanka.com/reception/og-image.jpg',
     width: 1200,
     height: 630,
     alt: 'Bhavi & Priyanka — Wedding Reception, Friday 29 January 2027, JP Farm, Navsari',

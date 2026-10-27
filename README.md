@@ -47,9 +47,9 @@ npm install
 npm run dev
 ```
 
-Then open **http://localhost:5050/wedding** (invitation) or **http://localhost:5050/wedding/menu**.
+Then open **http://localhost:5050/reception** (invitation) or **http://localhost:5050/reception/menu**.
 
-The site is served under `/wedding` (see `basePath` in `next.config.mjs`). Image and
+The site is served under `/reception` (see `basePath` in `next.config.mjs`). Image and
 audio paths in `page.jsx` use the `BASE` prefix so they follow that setting.
 
 ## 3. Hosting it for real
@@ -64,7 +64,7 @@ Or run it yourself with `npm run build && npm start`.
 
 Guests reply with the form in the "Will You Join Us?" section. Responses are
 saved one per line in `data/rsvps.jsonl` (or wherever `RSVP_FILE` points) and
-are viewed at **/wedding/rsvps**, which asks for a password (any username,
+are viewed at **/reception/rsvps**, which asks for a password (any username,
 password = `RSVP_ADMIN_PASSWORD`). The page has totals, filters, WhatsApp links
 for each guest and a CSV download. If a guest submits again with the same
 mobile number, their newest answer replaces the old one on that page; the CSV

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ADMIN_COOKIE, adminToken, safeEqual } from '@/lib/admin-auth';
 
-// Keeps the RSVP list (/wedding/rsvps and its CSV export) behind the login page.
+// Keeps the RSVP list (/reception/rsvps and its CSV export) behind the login page.
 export function proxy(req) {
     const token = adminToken();
     if (!token) {
