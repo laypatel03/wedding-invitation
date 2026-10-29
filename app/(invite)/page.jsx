@@ -170,7 +170,7 @@ export default async function InvitePage() {
                 </p>
 
                 <div className="reveal" style={{ ...familyName, lineHeight: 1.9 }}>
-                    Late Shri Ramanbhai Durlabhbhai Patel<br />
+                    Late Shri Ramanbhai Dullabhbhai Patel<br />
                     Smt. Sitaben Ramanbhai Patel
                 </div>
 
