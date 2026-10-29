@@ -164,10 +164,17 @@ export default async function InvitePage() {
                 <div className="eyebrow reveal">✦ With Blessings ✦</div>
                 <div className="divider reveal"></div>
 
-                <p className="shloka reveal" style={{ marginBottom: 26 }}>
+                <p className="shloka reveal" style={{ marginBottom: 14 }}>
                     By the infinite grace of the Almighty<br />
-                    and the blessings of our elders
+                    and the blessings of our beloved grandparents
                 </p>
+
+                <div className="reveal" style={{ ...familyName, lineHeight: 1.9 }}>
+                    Late Shri Ramanbhai Durlabhbhai Patel<br />
+                    Smt. Sitaben Ramanbhai Patel
+                </div>
+
+                <div className="divider reveal" style={{ margin: '30px auto' }}></div>
 
                 <div className="reveal" style={{ ...familyName, lineHeight: 1.9 }}>
                     Shri Niteshbhai Ramanbhai Patel<br />
